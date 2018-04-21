@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Home Hurbano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/daterangepicker.css" />
+
+    <script type="javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./assets/js/moment.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="./assets/js/daterangepicker.js"></script>
+    
+</head>
+
+<body>
+    <div  class="navigation col-lg-1">
+        <h1 class="head-title">
+            <a href="#">
+                <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+                HOME
+            </a>
+        </h1>
+        <nav id="navigation">
+            <a href="#">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</a>
+            <a href="#">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Artistas</a>
+            <a href="#">
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Albums</a>
+        </nav>
+        <nav id="userLogged">
+            <div class="user-image">
+                <img id="image-logged" src="./assets/img/IMG_20140102_170001.jpg">
+            </div>
+            <span>
+                Cristopher Vicuña
+            </span>
+            <a >
+                <span class="glyphicon glyphicon-cog" aria-hidden="true">
+                </span> Mis Datos
+            </a>
+            <a class="btn-logout">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true">
+                </span> Salir
+            </a>
+        </nav>
+    </div>
+
+    <div class="col-lg-11 vertical-center">
+            <div class="col-lg-8 col-lg-offset-3" >
+                <h1>Tu hogar donde Vayas</h1>
+                <form class="col-md-10">
+                    <p>
+                        <label>Nombre:</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </p>
+                    <p>
+                        <label>Apellidos:</label>
+                        <input type="text" name="lastname" class="form-control" required>
+                    </p>
+                    <p>
+                        <label>Correo electrónico:</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </p>
+                    <p>
+                        <label>Fecha de llegada - salida:</label>
+                        <input type="text" name="daterange" class="form-control" required>
+                    </p>
+
+                    <br/>
+    
+                    <input type="button" class="btn btn-primary form-control" onclick="myFunction()" value="Registrar">
+    
+                </form>
+            </div> 
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $('input[name=daterange]').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
+            
+            $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            });
+
+        })
+        let myFunction = () => {
+
+            var name = $('input[name=name]').val();
+            var lastname = $('input[name=lastname]').val();
+            var email = $('input[name=email]').val();
+            var daterange = $('input[name=daterange]').val();
+
+            var dateArray = daterange.split('-')
+
+            var dateIni = dateArray[0].trim();
+            var dateFin = dateArray[1].trim();
+
+            console.log(`name: ${name}, lastname: ${lastname}, email: ${email}, fecha inicio: ${dateIni}, fecha final: ${dateFin}`);
+        }
+    </script>
+</body>
+</html>
